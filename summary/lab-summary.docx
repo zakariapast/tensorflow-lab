@@ -1,1 +1,36 @@
 # Manager-facing summary (for PDF export)
+🧪 Lab Summary – Part 1: Baseline Model Without Privacy
+Objective: Train a simple image classification model using TensorFlow to recognize handwritten digits from the MNIST dataset. This serves as the baseline before adding privacy protections.
+
+🟩 Environment Preparation
+Step	Detail
+Platform	Google Colab (recommended for GPU + easy setup)
+Tools Installed	tensorflow, tensorflow-privacy
+Fix Applied	Upgraded packaging to fix dependency error
+
+📦 Dataset Used
+Dataset	Description
+MNIST	70,000 grayscale images of handwritten digits (28×28 pixels)
+Training Set	60,000 images
+Test Set	10,000 images
+Labels	Integers 0 to 9
+
+🧱 Model Architecture (Baseline)
+Layer	Description
+Flatten	Converts 28×28 image to 784 vector
+Dense(128, relu)	Hidden layer with 128 units
+Dense(10)	Output layer for 10 digit classes (0–9)
+
+⚙️ Training Configuration
+Parameter	Value
+Optimizer	adam
+Loss	SparseCategoricalCrossentropy(from_logits=True)
+Epochs	5
+Validation Split	10% of training data
+
+📈 Training Results
+Epoch	Accuracy	Val Accuracy	Loss	Val Loss
+1	86.5%	96.4%	0.47	0.12
+5	98.6%	97.8%	0.04	0.07
+
+✅ Model performs very well, but privacy risk exists: It could overfit or leak data through future attacks.
