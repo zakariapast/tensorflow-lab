@@ -34,3 +34,45 @@ Epoch	Accuracy	Val Accuracy	Loss	Val Loss
 5	98.6%	97.8%	0.04	0.07
 
 ✅ Model performs very well, but privacy risk exists: It could overfit or leak data through future attacks.
+==============================================================================================================================================
+🧪 Lab Summary – Part 2: Model with Differential Privacy (DP)
+Objective: Train a model using TensorFlow Privacy to protect individual data points and mitigate the risk of data leakage (e.g. membership inference attacks).
+
+🟩 Differential Privacy Setup
+Component	Value
+Optimizer	DPKerasAdamOptimizer
+L2 Norm Clip	1.0
+Noise Multiplier	1.1 (Gaussian noise added)
+Microbatches	250
+Batch Size	250
+Loss Function	SparseCategoricalCrossentropy with reduction=None
+Epochs	5
+Dataset	MNIST (handwritten digits)
+
+⚙️ Model Architecture
+Layer	Type	Notes
+Flatten	Input	28×28 to 784
+Dense(128, relu)	Hidden	Fully connected
+Dense(10)	Output	10 classes
+
+📈 Training Results (DP Model)
+Epoch	Train Accuracy	Validation Accuracy	Train Loss	Validation Loss
+1	83.7%	89.2%	0.5206	0.3606
+2	86.7%	90.3%	0.4422	0.3254
+3	87.9%	91.1%	0.4201	0.3110
+4	88.6%	91.4%	0.4100	0.3068
+5	89.1%	91.5%	0.4069	0.3056
+
+🔐 Privacy Observations
+Accuracy is slightly lower than the baseline model, but data exposure risk is reduced.
+
+The model generalizes well despite added noise.
+
+This setup aligns with privacy-preserving AI goals in production systems.
+
+🆚 Comparison to Baseline (No DP)
+Metric	Baseline Model	DP Model
+Final Train Acc	98.6%	89.1%
+Final Val Acc	97.8%	91.5%
+Privacy Level	❌ None	✅ Enforced
+Use Case	High accuracy	Privacy critical scenarios
